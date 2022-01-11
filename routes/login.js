@@ -1,13 +1,22 @@
-var express = require("express");
-var router = express.Router();
+const express = require("express");
+const loginSchema = require("./validation/login");
+const router = express.Router();
 
 /* GET login listing. */
 router.get("/", function (req, res) {
   res.render("login");
 });
 
-router.post("/", (req, res) => {
+router.post("/", async (req, res) => {
   console.log(req.body);
+  try {
+    const value = await loginSchema.schema.validateAsync(req.body, {
+      abortEarly: false,
+    });
+    console.log("value", value);
+  } catch (err) {
+    console.error("err", err);
+  }
 });
 
 router.get("/unsecured", (req, res) => {
