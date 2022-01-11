@@ -15,7 +15,8 @@ router.post("/", async (req, res) => {
     });
     console.log("value", value);
   } catch (err) {
-    console.error("err", err);
+    // console.error("err", err);
+    res.json(err);
   }
 });
 
