@@ -1,1 +1,9 @@
-<h2>welcome {{username}}</h2>
+{{#if isLoggedIn}}
+<div class="alert alert-primary" role="alert">
+  <h2>welcome {{username}}</h2>
+</div>
+{{else}}
+<div class="alert alert-danger" role="alert">
+  <h2>{{username}} not logged in</h2>
+</div> 
+{{/if}}
