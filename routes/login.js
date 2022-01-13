@@ -9,8 +9,11 @@ const usersArr = [
 
 /* GET login listing. */
 router.get("/", function (req, res) {
-  console.log(req.session.errjoi.details[0]);
-  res.render("login", req.session.errjoi);
+  // console.log(req.session.errjoi.details[0]);
+  let errjoi = {};
+  if (req.session.errjoi) errjoi = req.session.errjoi;
+  console.log(errjoi);
+  res.render("login", errjoi);
 });
 
 router.post("/", async (req, res) => {
@@ -25,6 +28,7 @@ router.post("/", async (req, res) => {
         if (user.password === value.password) {
           req.session.loggedIn = true;
           res.redirect("/admin");
+          return;
         }
       }
     }

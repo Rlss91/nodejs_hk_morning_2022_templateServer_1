@@ -14,3 +14,8 @@
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+<ul class="list-group">
+  {{#each details}}
+  <li class="list-group-item list-group-item-danger">{{this.message}}</li>
+  {{/each}}
+</ul>
