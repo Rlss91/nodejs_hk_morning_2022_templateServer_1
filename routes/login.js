@@ -1,10 +1,19 @@
 const express = require("express");
+const bcrypt = require("../config/bcrypt");
 const loginSchema = require("./validation/login");
 const router = express.Router();
 
 const usersArr = [
-  { email: "1@2.com", name: "1", password: "Aa123456" },
-  { email: "2@2.com", name: "2", password: "Aa123456" },
+  {
+    email: "1@2.com",
+    name: "1",
+    password: "$2a$10$PqOHM0dgNN4W78KWxStHoOC7UwYkQxiB2jxMJqz1aJGSZ7DYU1TL6",
+  },
+  {
+    email: "2@2.com",
+    name: "2",
+    password: "$2a$10$PqOHM0dgNN4W78KWxStHoOC7UwYkQxiB2jxMJqz1aJGSZ7DYU1TL6",
+  },
 ];
 
 /* GET login listing. */
@@ -28,7 +37,8 @@ router.post("/", async (req, res) => {
     console.log("value", value);
     for (let user of usersArr) {
       if (user.email === value.email) {
-        if (user.password === value.password) {
+        let isOk = await bcrypt.cmpHash(value.password, user.password);
+        if (isOk) {
           req.session.loggedIn = true;
           req.session.loggedInUsername = user.name;
           // res.redirect("/admin");

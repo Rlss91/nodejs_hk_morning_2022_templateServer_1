@@ -11,6 +11,7 @@ const authMiddware = require("./routes/middleware/auth");
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 const petsRouter = require("./routes/pets");
+const signupRouter = require("./routes/signup");
 const loginRouter = require("./routes/login");
 const adminRouter = require("./routes/admin");
 
@@ -57,6 +58,7 @@ app.use(
 app.use("/", indexRouter);
 app.use("/users", authMiddware, usersRouter);
 app.use("/pets", petsRouter);
+app.use("/signup", signupRouter);
 app.use("/login", loginRouter);
 app.use("/admin", authMiddware, adminRouter);
 
