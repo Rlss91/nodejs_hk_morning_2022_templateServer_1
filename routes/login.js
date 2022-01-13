@@ -51,6 +51,11 @@ router.post("/", async (req, res) => {
   }
 });
 
+router.get("/logout", (req, res) => {
+  req.session.destroy();
+  res.redirect("/");
+});
+
 router.get("/unsecured", (req, res) => {
   console.log(req.query);
 });

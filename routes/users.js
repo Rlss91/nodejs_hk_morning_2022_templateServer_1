@@ -6,7 +6,7 @@ router.get("/", function (req, res) {
   // res.render("users", { username: "kenny", isLoggedIn: true });
   res.render("users", {
     username: req.session.loggedInUsername,
-    isLoggedIn: true,
+    loggedIn: req.session.loggedIn,
   });
 });
 
