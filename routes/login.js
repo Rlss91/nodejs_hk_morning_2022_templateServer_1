@@ -11,7 +11,10 @@ const usersArr = [
 router.get("/", function (req, res) {
   // console.log(req.session.errjoi.details[0]);
   let errjoi = {};
-  if (req.session.errjoi) errjoi = req.session.errjoi;
+  if (req.session.errjoi) {
+    errjoi = req.session.errjoi;
+    req.session.errjoi = undefined;
+  }
   console.log(errjoi);
   res.render("login", errjoi);
 });
