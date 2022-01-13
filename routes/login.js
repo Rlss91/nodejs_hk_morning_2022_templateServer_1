@@ -3,8 +3,8 @@ const loginSchema = require("./validation/login");
 const router = express.Router();
 
 const usersArr = [
-  { email: "1@2.com", password: "Aa123456" },
-  { email: "2@2.com", password: "Aa123456" },
+  { email: "1@2.com", name: "1", password: "Aa123456" },
+  { email: "2@2.com", name: "2", password: "Aa123456" },
 ];
 
 /* GET login listing. */
@@ -30,7 +30,9 @@ router.post("/", async (req, res) => {
       if (user.email === value.email) {
         if (user.password === value.password) {
           req.session.loggedIn = true;
-          res.redirect("/admin");
+          req.session.loggedInUsername = user.name;
+          // res.redirect("/admin");
+          res.redirect("/users");
           return;
         }
       }
