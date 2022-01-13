@@ -14,6 +14,7 @@ router.post("/", async (req, res) => {
       abortEarly: false,
     });
     console.log("value", value);
+    res.redirect("/admin");
   } catch (err) {
     // console.error("err", err);
     res.json(err);

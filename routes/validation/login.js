@@ -1,4 +1,3 @@
-const e = require("express");
 const Joi = require("joi");
 
 const schema = Joi.object({
@@ -10,6 +9,7 @@ const schema = Joi.object({
     .required()
     .messages({
       "any.required": "please input a valid email",
+      "string.email": "please use mails only from .com and .net",
     }),
   password: Joi.string().pattern(new RegExp("^[a-zA-Z0-9]{3,30}$")).messages({
     "string.pattern.base": "please enter valid password",
