@@ -60,6 +60,21 @@ app.use("/pets", petsRouter);
 app.use("/login", loginRouter);
 app.use("/admin", authMiddware, adminRouter);
 
+//!---------------------
+//!---------------------
+//!---------------------
+//!--------DONT---------
+//!--------USE----------
+//!--------THIS---------
+//!--------CODE---------
+//!---------------------
+//!---------------------
+//!---------------------
+// app.get("/locals", (req, res) => {
+//   app.locals.loggedIn = true;
+//   res.redirect("/");
+// });
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
