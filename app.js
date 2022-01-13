@@ -1,9 +1,12 @@
 const createError = require("http-errors");
 const express = require("express");
 const path = require("path");
+const sessions = require("express-session");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 // const { engine } = require("express-handlebars");
+
+const authMiddware = require("./routes/middleware/auth");
 
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
@@ -28,6 +31,14 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(
+  sessions({
+    secret: "this is mysecret keyword",
+    saveUninitialized: true,
+    cookie: { maxAge: 1000 * 60 * 60 * 24 * 7 },
+    resave: false,
+  })
+);
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use(
@@ -44,10 +55,10 @@ app.use(
 );
 
 app.use("/", indexRouter);
-app.use("/users", usersRouter);
+app.use("/users", authMiddware, usersRouter);
 app.use("/pets", petsRouter);
 app.use("/login", loginRouter);
-app.use("/admin", adminRouter);
+app.use("/admin", authMiddware, adminRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
